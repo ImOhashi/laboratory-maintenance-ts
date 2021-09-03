@@ -1,11 +1,17 @@
 import express from "express";
+import { config } from "dotenv";
 
+import database from "./database/connect";
 import { morganMiddleware } from "./utils";
 
 class App {
   public app: express.Application = express();
 
   constructor() {
+    config();
+
+    database.connect();
+
     this.middlewares();
   }
 

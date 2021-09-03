@@ -1,0 +1,1 @@
+export { DatabaseError } from "./databaseError";
