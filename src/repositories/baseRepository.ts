@@ -1,24 +1,31 @@
-import { Schema } from "mongoose";
+import { Model, Schema } from "mongoose";
+
 import { IBaseRepository } from "../interfaces";
 
 export class BaseRepository implements IBaseRepository {
-    constructor() {
-        
-    }
+  private model: Model<any>;
 
-    get(id: String | Schema.Types.ObjectId): Promise<any> {
-        throw new Error("Method not implemented.");
-    }
-    getAll(): Promise<any> {
-        throw new Error("Method not implemented.");
-    }
-    create(model: any): Promise<any> {
-        throw new Error("Method not implemented.");
-    }
-    update(id: String | Schema.Types.ObjectId, model: any): Promise<any> {
-        throw new Error("Method not implemented.");
-    }
-    delete(id: String | Schema.Types.ObjectId): Promise<any> {
-        throw new Error("Method not implemented.");
-    }
+  constructor(model: Model<any>) {
+    this.model = model;
+  }
+
+  async get(id: String | Schema.Types.ObjectId): Promise<any> {
+    return this.model.findById(id);
+  }
+  async getAll(): Promise<any> {
+    return this.model.find();
+  }
+  async create(model: any): Promise<any> {
+    return this.model.create(model);
+  }
+  async update(id: String | Schema.Types.ObjectId, model: any): Promise<any> {
+    return this.model.findOneAndUpdate(
+      { _id: id },
+      { $set: model },
+      { new: true, returnOriginal: false }
+    );
+  }
+  async delete(id: String | Schema.Types.ObjectId): Promise<any> {
+    return this.model.findOneAndDelete({ _id: id });
+  }
 }
