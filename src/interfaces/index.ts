@@ -1,1 +1,1 @@
-export { Laboratory, LaboratoryDocument } from "./Laboratory.in";
+export { Laboratory, LaboratoryDocument, status } from "./Laboratory.in";
