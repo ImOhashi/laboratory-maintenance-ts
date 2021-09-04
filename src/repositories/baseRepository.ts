@@ -1,8 +1,6 @@
 import { Model, Schema } from "mongoose";
 
-import { IBaseRepository } from "../interfaces";
-
-export class BaseRepository implements IBaseRepository {
+export class BaseRepository {
   private model: Model<any>;
 
   constructor(model: Model<any>) {
