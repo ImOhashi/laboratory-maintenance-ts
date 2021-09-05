@@ -1,5 +1,6 @@
 import { Request, Response } from "express";
 import { StatusCodes } from "http-status-codes";
+import { badRequest, ok } from "../utils";
 
 import { LaboratoryServiceError } from "../errors";
 
@@ -8,14 +9,22 @@ import laboratoryServices from "../services/laboratoryServices";
 class LaboratoryControllers {
   async register(req: Request, res: Response) {
     try {
-      const newLaboratory = await laboratoryServices.register({
-        ...req.body,
-      });
+      const { name, address } = req.body;
 
-      return res.status(StatusCodes.CREATED).json(newLaboratory);
+      if (!name || !address) {
+        res
+          .status(StatusCodes.BAD_REQUEST)
+          .json(badRequest(new LaboratoryServiceError("Invalid request body")));
+      } else {
+        const newLaboratory = await laboratoryServices.register({
+          ...req.body,
+        });
+
+        return res.status(StatusCodes.CREATED).json(ok(newLaboratory));
+      }
     } catch (err) {
       throw new LaboratoryServiceError(
-        `Unable to register the data entered.\n${err}`
+        `Error generating record.\n${err}`
       );
     }
   }
