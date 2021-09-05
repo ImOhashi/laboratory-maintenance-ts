@@ -1,9 +1,8 @@
 import { Request, Response } from "express";
 import { StatusCodes } from "http-status-codes";
+
 import { badRequest, ok, notFound } from "../utils";
-
 import { LaboratoryServiceError } from "../errors";
-
 import laboratoryServices from "../services/laboratoryServices";
 
 class LaboratoryControllers {
