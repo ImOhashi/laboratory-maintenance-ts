@@ -26,6 +26,16 @@ class LaboratoryControllers {
       throw new LaboratoryServiceError(`Error generating record.\n${err}`);
     }
   }
+
+  async getAllActives(req: Request, res: Response) {
+    try {
+      return res
+        .status(StatusCodes.OK)
+        .json(ok(await laboratoryServices.getAllActives()));
+    } catch (err) {
+      throw new LaboratoryServiceError(`Error trying to query data.\n${err}`);
+    }
+  }
 }
 
 export default new LaboratoryControllers();

@@ -10,7 +10,9 @@ class LaboratoryRoutes {
   }
 
   private setRoutes() {
-    this.router.post("/", laboratoryControllers.register);
+    this.router
+      .post("/", laboratoryControllers.register)
+      .get("/", laboratoryControllers.getAllActives);
   }
 }
 
