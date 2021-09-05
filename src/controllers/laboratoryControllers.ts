@@ -23,9 +23,7 @@ class LaboratoryControllers {
         return res.status(StatusCodes.CREATED).json(ok(newLaboratory));
       }
     } catch (err) {
-      throw new LaboratoryServiceError(
-        `Error generating record.\n${err}`
-      );
+      throw new LaboratoryServiceError(`Error generating record.\n${err}`);
     }
   }
 }
