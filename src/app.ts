@@ -3,6 +3,7 @@ import { config } from "dotenv";
 
 import database from "./database/connect";
 import { morganMiddleware } from "./utils";
+import router from "./routes";
 
 class App {
   public app: express.Application = express();
@@ -25,6 +26,7 @@ class App {
         extended: false,
       })
     );
+    this.app.use(router);
   }
 }
 
