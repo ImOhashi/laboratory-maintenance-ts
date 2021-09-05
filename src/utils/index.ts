@@ -6,4 +6,5 @@ export {
   forbidden,
   noContent,
   serverError,
+  notFound,
 } from "./httpHelper";

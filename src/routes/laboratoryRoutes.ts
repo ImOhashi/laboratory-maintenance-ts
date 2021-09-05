@@ -12,7 +12,8 @@ class LaboratoryRoutes {
   private setRoutes() {
     this.router
       .post("/", laboratoryControllers.register)
-      .get("/", laboratoryControllers.getAllActives);
+      .get("/", laboratoryControllers.getAllActives)
+      .put("/:id", laboratoryControllers.update);
   }
 }
 

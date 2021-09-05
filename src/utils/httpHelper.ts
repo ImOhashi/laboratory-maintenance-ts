@@ -18,6 +18,11 @@ export const serverError = (error: Error): HttpResponse => ({
   body: new ServerError(error.stack),
 });
 
+export const notFound = (error: Error): HttpResponse => ({
+  statusCode: StatusCodes.NOT_FOUND,
+  body: error,
+});
+
 export const ok = (data: any): HttpResponse => ({
   statusCode: StatusCodes.OK,
   body: data,

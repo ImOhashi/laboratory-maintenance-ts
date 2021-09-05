@@ -1,4 +1,4 @@
-import { Schema } from "mongoose";
+import { Schema, Types } from "mongoose";
 
 import LaboratoryRepository from "../repositories/laboratoryRepository";
 import { ILaboratoryServices, Laboratory, status } from "../interfaces";
@@ -18,20 +18,17 @@ class LaboratoryServices implements ILaboratoryServices {
   async getAllActives(): Promise<Laboratory[]> {
     return this.laboratoryRepository.getActives();
   }
-  
-  async update(
-    id: String | Schema.Types.ObjectId,
-    laboratory: Laboratory
-  ): Promise<Laboratory> {
-    return this.laboratoryRepository.update(id, {
+
+  async update(id: string, laboratory: Laboratory): Promise<Laboratory> {
+    return this.laboratoryRepository.update(new Types.ObjectId(id), {
       name: laboratory.name,
       address: laboratory.address,
       status: status.active,
     });
   }
 
-  async deleteActive(id: String | Schema.Types.ObjectId): Promise<Laboratory> {
-    return this.laboratoryRepository.deleteActive(id);
+  async deleteActive(id: string): Promise<Laboratory> {
+    return this.laboratoryRepository.deleteActive(new Types.ObjectId(id));
   }
 }
 

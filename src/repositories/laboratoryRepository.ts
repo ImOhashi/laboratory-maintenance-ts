@@ -1,4 +1,4 @@
-import { Schema } from "mongoose";
+import { Types } from "mongoose";
 
 import { Laboratory, status } from "../interfaces";
 import LaboratoryModel from "../models/laboratory";
@@ -15,7 +15,7 @@ export default class LaboratoryRepository extends BaseRepository {
     });
   }
 
-  async deleteActive(id: String | Schema.Types.ObjectId): Promise<Laboratory> {
+  async deleteActive(id: Types.ObjectId): Promise<Laboratory> {
     return LaboratoryModel.findByIdAndDelete(
       {
         _id: id,
