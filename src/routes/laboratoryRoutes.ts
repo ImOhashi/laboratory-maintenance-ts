@@ -13,7 +13,8 @@ class LaboratoryRoutes {
     this.router
       .post("/", laboratoryControllers.register)
       .get("/", laboratoryControllers.getAllActives)
-      .put("/:id", laboratoryControllers.update);
+      .put("/:id", laboratoryControllers.update)
+      .delete("/:id", laboratoryControllers.delete);
   }
 }
 

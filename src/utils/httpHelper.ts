@@ -28,6 +28,16 @@ export const ok = (data: any): HttpResponse => ({
   body: data,
 });
 
+export const notAcceptable = (data: any): HttpResponse => ({
+  statusCode: StatusCodes.NOT_ACCEPTABLE,
+  body: data,
+});
+
+export const created = (data: any): HttpResponse => ({
+  statusCode: StatusCodes.CREATED,
+  body: data,
+});
+
 export const noContent = (): HttpResponse => ({
   statusCode: StatusCodes.NO_CONTENT,
   body: null,

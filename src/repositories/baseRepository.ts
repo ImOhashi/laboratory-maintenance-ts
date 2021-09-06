@@ -7,7 +7,7 @@ export class BaseRepository {
     this.model = model;
   }
 
-  async get(id: String | Types.ObjectId): Promise<any> {
+  async get(id: string | Types.ObjectId): Promise<any> {
     return this.model.findById(id);
   }
   async getAll(): Promise<any> {

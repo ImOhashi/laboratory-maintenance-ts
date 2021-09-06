@@ -19,11 +19,15 @@ class LaboratoryServices implements ILaboratoryServices {
     return this.laboratoryRepository.getActives();
   }
 
+  async get(id: string): Promise<Laboratory> {
+    return this.laboratoryRepository.get(new Types.ObjectId(id));
+  }
+
   async update(id: string, laboratory: Laboratory): Promise<Laboratory> {
     return this.laboratoryRepository.update(new Types.ObjectId(id), {
       name: laboratory.name,
       address: laboratory.address,
-      status: status.active,
+      status: laboratory.status,
     });
   }
 

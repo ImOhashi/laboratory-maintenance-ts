@@ -1,9 +1,10 @@
 import { Request, Response } from "express";
 import { StatusCodes } from "http-status-codes";
 
-import { badRequest, ok, notFound } from "../utils";
+import { badRequest, ok, notFound, created, notAcceptable } from "../utils";
 import { LaboratoryServiceError } from "../errors";
 import laboratoryServices from "../services/laboratoryServices";
+import { status } from "../interfaces";
 
 class LaboratoryControllers {
   async register(req: Request, res: Response): Promise<Response> {
@@ -19,7 +20,7 @@ class LaboratoryControllers {
           ...req.body,
         });
 
-        return res.status(StatusCodes.CREATED).json(ok(newLaboratory));
+        return res.status(StatusCodes.CREATED).json(created(newLaboratory));
       }
     } catch (err) {
       throw new LaboratoryServiceError(`Error generating record.\n${err}`);
@@ -52,10 +53,36 @@ class LaboratoryControllers {
           ...req.body,
         });
 
-        return res.status(StatusCodes.CREATED).json(ok(newLaboratory));
+        return res.status(StatusCodes.CREATED).json(created(newLaboratory));
       }
     } catch (err) {
       throw new LaboratoryServiceError(`Error trying to updated data.\n${err}`);
+    }
+  }
+
+  async delete(req: Request, res: Response): Promise<Response> {
+    try {
+      const { id } = req.params;
+
+      if (!id) {
+        return res
+          .status(StatusCodes.NOT_FOUND)
+          .json(notFound(new LaboratoryServiceError(`Id not informed.`)));
+      }
+
+      const laboratory = await laboratoryServices.get(id);
+
+      if (laboratory && laboratory.status != status.active) {
+        const deletedLab = await laboratoryServices.deleteActive(id);
+
+        return res.status(StatusCodes.OK).json(ok(deletedLab));
+      }
+
+      return res
+        .status(StatusCodes.NOT_ACCEPTABLE)
+        .json(notAcceptable("Content not found or active status"));
+    } catch (err) {
+      throw new LaboratoryServiceError(`Error trying to deleted data.\n${err}`);
     }
   }
 }
