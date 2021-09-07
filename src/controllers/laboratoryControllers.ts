@@ -72,7 +72,7 @@ class LaboratoryControllers {
 
       const laboratory = await laboratoryServices.get(id);
 
-      if (laboratory && laboratory.status != status.active) {
+      if (laboratory && laboratory.status == status.active) {
         const deletedLab = await laboratoryServices.deleteActive(id);
 
         return res.status(StatusCodes.OK).json(ok(deletedLab));
@@ -80,7 +80,7 @@ class LaboratoryControllers {
 
       return res
         .status(StatusCodes.NOT_ACCEPTABLE)
-        .json(notAcceptable("Content not found or active status"));
+        .json(notAcceptable("Content not found or inactive status"));
     } catch (err) {
       throw new LaboratoryServiceError(`Error trying to deleted data.\n${err}`);
     }
