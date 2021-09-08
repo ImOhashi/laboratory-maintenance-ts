@@ -1,6 +1,6 @@
 import { model, Model, Schema } from "mongoose";
+
 import { ExamDocument } from "../interfaces";
-import LaboratoryModel from "./laboratory";
 
 const ExamSchema: Schema = new Schema({
   name: {
@@ -15,15 +15,14 @@ const ExamSchema: Schema = new Schema({
     type: String,
     required: true,
   },
-  laboratory: {
-      type: [LaboratoryModel],
-      required: true
-  },
+  laboratory: [
+    {
+      type: Object,
+      required: true,
+    },
+  ],
 });
 
-const ExamModel: Model<ExamDocument> = model(
-  "ExamModel",
-  ExamSchema
-);
+const ExamModel: Model<ExamDocument> = model("ExamModel", ExamSchema);
 
 export default ExamModel;
