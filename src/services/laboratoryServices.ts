@@ -1,4 +1,4 @@
-import { Schema, Types } from "mongoose";
+import { Types } from "mongoose";
 
 import LaboratoryRepository from "../repositories/laboratoryRepository";
 import { ILaboratoryServices, Laboratory, status } from "../interfaces";

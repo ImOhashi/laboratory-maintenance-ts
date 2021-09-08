@@ -1,7 +1,7 @@
 import { Document } from "mongoose";
 import { Laboratory } from ".";
 
-export enum status {
+export enum statusExam {
   active = "ativo",
   inactive = "inativo",
 }
@@ -14,7 +14,7 @@ export enum type {
 export interface Exam {
   name: String;
   type: type;
-  status: status;
+  status: statusExam;
   laboratory: Laboratory[];
 }
 

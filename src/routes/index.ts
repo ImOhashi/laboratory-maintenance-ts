@@ -1,6 +1,7 @@
 import { Request, Response, Router } from "express";
 
 import laboratoryRoutes from "./laboratoryRoutes";
+import examRoutes from "./examRoutes";
 
 class Routes {
   public router: Router = Router();
@@ -20,6 +21,7 @@ class Routes {
     });
 
     this.router.use("/laboratory", laboratoryRoutes);
+    this.router.use("/exam", examRoutes);
   }
 }
 
